@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 
 const app = express()
 const PORT = 4000
-console.log('New image build')
+
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://mongo/CRMdb', {
   useNewUrlParser: true,
