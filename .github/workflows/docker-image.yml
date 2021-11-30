@@ -17,7 +17,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      with:
-        heroku_api_key: bbabc279-8e34-480b-a2f5-cf213042be3c
-        heroku_app_name: 'crm-api-docker'
-        heroku_email: 'sabinshrestha292@gmail.com'
+      - name: Add remote origin
+        if: github.ref == 'refs/heads/master' && job.status == 'success' #we specify that this action will ONLY run if everything up to now is successful- so if theres a fail in the tests, then this will not be deployed.
+        run: |
+          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - name: Deploy to Heroku
+        run: |
+          git push heroku HEAD:master -f
