@@ -20,7 +20,7 @@ jobs:
       - name: Add remote origin
         if: github.ref == 'refs/heads/master' && job.status == 'success' #we specify that this action will ONLY run if everything up to now is successful- so if theres a fail in the tests, then this will not be deployed.
         run: |
-          git remote add heroku https://git.heroku.com/crm-api-docker.git
+          git remote add heroku https://heroku:bbabc279-8e34-480b-a2f5-cf213042be3c@git.heroku.com/crm-api-docker.git
 
       - name: Deploy to Heroku
         run: |
